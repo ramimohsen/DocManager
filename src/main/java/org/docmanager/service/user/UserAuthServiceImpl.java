@@ -6,6 +6,7 @@ import org.docmanager.dto.auth.UserLoginRequest;
 import org.docmanager.dto.auth.UserSignUpRequest;
 import org.docmanager.dto.auth.UserSignUpResponse;
 import org.docmanager.exception.custom.AlreadyExistException;
+import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.model.Role;
 import org.docmanager.model.User;
 import org.docmanager.model.UserRole;
@@ -42,12 +43,13 @@ public class UserAuthServiceImpl implements UserAuthService {
     private final JwtUtils jwtUtils;
 
     @Override
-    public UserSignUpResponse registerUser(UserSignUpRequest userSignUpRequest) throws AlreadyExistException {
+    public UserSignUpResponse registerUser(UserSignUpRequest userSignUpRequest) throws AlreadyExistException, NotFoundException {
 
         if (Boolean.TRUE.equals(userRepository.existsByEmail(userSignUpRequest.getEmail())))
             throw new AlreadyExistException(String.format("User with email %s already exists", userSignUpRequest.getEmail()));
 
-        Role role = this.roleRepository.save(Role.builder().name(UserRole.ROLE_CUSTOMER).build());
+        Role role = roleRepository.findByName(UserRole.ROLE_CUSTOMER)
+                .orElseThrow(() -> new NotFoundException("Role not found"));
 
         User user = userRepository.save(User.builder().roles(Set.of(role))
                 .email(userSignUpRequest.getEmail())

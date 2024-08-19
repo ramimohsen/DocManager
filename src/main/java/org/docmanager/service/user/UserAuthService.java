@@ -5,6 +5,7 @@ import org.docmanager.dto.auth.UserLoginRequest;
 import org.docmanager.dto.auth.UserSignUpRequest;
 import org.docmanager.dto.auth.UserSignUpResponse;
 import org.docmanager.exception.custom.AlreadyExistException;
+import org.docmanager.exception.custom.NotFoundException;
 
 public interface UserAuthService {
 
@@ -13,7 +14,7 @@ public interface UserAuthService {
      * @return @{@link UserSignUpResponse}
      * @throws AlreadyExistException if user email already exists
      */
-    UserSignUpResponse registerUser(UserSignUpRequest userSignUpRequest) throws AlreadyExistException;
+    UserSignUpResponse registerUser(UserSignUpRequest userSignUpRequest) throws AlreadyExistException, NotFoundException;
 
     /**
      * @param userLoginRequest user login request dto

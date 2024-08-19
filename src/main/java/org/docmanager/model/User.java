@@ -33,6 +33,6 @@ public class User {
     private LocalDateTime registrationDate;
 
     @NotNull
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 }

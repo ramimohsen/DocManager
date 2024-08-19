@@ -14,6 +14,7 @@ import org.docmanager.dto.auth.UserLoginRequest;
 import org.docmanager.dto.auth.UserSignUpRequest;
 import org.docmanager.dto.auth.UserSignUpResponse;
 import org.docmanager.exception.custom.AlreadyExistException;
+import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.exception.response.ErrorDetails;
 import org.docmanager.service.user.UserAuthService;
 import org.springframework.validation.annotation.Validated;
@@ -36,7 +37,7 @@ public class UserAuthController {
             @ApiResponse(responseCode = "400", content = {@Content(schema = @Schema(implementation = ErrorDetails.class), mediaType = "application/json")}),
     })
     @PostMapping("/auth/register")
-    public UserSignUpResponse registerUser(@RequestBody @Valid UserSignUpRequest userSignUpRequest) throws AlreadyExistException {
+    public UserSignUpResponse registerUser(@RequestBody @Valid UserSignUpRequest userSignUpRequest) throws AlreadyExistException, NotFoundException {
         return this.userAuthService.registerUser(userSignUpRequest);
     }
 
