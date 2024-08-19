@@ -1,4 +1,4 @@
-package org.docmanager.service.impl;
+package org.docmanager.service.document;
 
 import lombok.RequiredArgsConstructor;
 import org.docmanager.dto.document.CreateDocumentDTO;
@@ -8,7 +8,6 @@ import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.model.Document;
 import org.docmanager.repository.DocumentRepository;
-import org.docmanager.service.IDocument;
 import org.springframework.stereotype.Service;
 
 

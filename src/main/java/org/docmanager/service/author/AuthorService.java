@@ -1,4 +1,4 @@
-package org.docmanager.service.impl;
+package org.docmanager.service.author;
 
 import lombok.RequiredArgsConstructor;
 import org.docmanager.dto.authors.AuthorDTO;
@@ -8,7 +8,6 @@ import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.model.Author;
 import org.docmanager.repository.AuthorRepository;
-import org.docmanager.service.IAuthor;
 import org.springframework.stereotype.Service;
 
 @Service

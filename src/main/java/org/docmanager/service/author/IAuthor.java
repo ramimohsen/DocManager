@@ -1,4 +1,4 @@
-package org.docmanager.service;
+package org.docmanager.service.author;
 
 import org.docmanager.dto.authors.AuthorDTO;
 import org.docmanager.dto.authors.CreateAuthorDTO;

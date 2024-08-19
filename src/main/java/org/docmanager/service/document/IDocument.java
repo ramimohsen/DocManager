@@ -1,4 +1,4 @@
-package org.docmanager.service;
+package org.docmanager.service.document;
 
 import org.docmanager.dto.document.CreateDocumentDTO;
 import org.docmanager.dto.document.DocumentDTO;
