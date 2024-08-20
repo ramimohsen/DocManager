@@ -9,6 +9,7 @@ import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.model.Author;
 import org.docmanager.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -41,12 +42,14 @@ public class AuthorService implements IAuthor {
     }
 
     @Override
+    @Transactional
     public void deleteAuthor(Long authorId) throws NotFoundException {
         AuthorDTO authorDTO = this.getAuthorById(authorId);
         this.authorRepository.deleteById(authorDTO.getId());
     }
 
     @Override
+    @Transactional
     public AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException {
         return null;
     }

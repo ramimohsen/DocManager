@@ -9,6 +9,7 @@ import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.model.Document;
 import org.docmanager.repository.DocumentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -44,12 +45,14 @@ public class DocumentService implements IDocument {
     }
 
     @Override
+    @Transactional
     public void deleteDocument(Long documentId) throws NotFoundException {
         DocumentDTO documentDTO = this.getDocumentById(documentId);
         this.documentRepository.deleteById(documentDTO.getId());
     }
 
     @Override
+    @Transactional
     public DocumentDTO updateDocument(Long documentId, UpdateDocumentDTO documentDTO) throws NotFoundException {
         return null;
     }
