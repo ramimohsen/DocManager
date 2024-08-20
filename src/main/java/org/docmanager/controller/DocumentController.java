@@ -50,7 +50,7 @@ public class DocumentController {
     @Operation(summary = "Update document")
     @PutMapping("/{documentId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public DocumentDTO updateDocument(@PathVariable("documentId") Long documentId, @RequestBody UpdateDocumentDTO documentDTO) throws NotFoundException {
+    public DocumentDTO updateDocument(@PathVariable("documentId") Long documentId, @RequestBody UpdateDocumentDTO documentDTO) throws NotFoundException, AlreadyExistException {
         return this.documentService.updateDocument(documentId, documentDTO);
     }
 

@@ -86,8 +86,17 @@ public class DocumentService implements IDocument {
 
     @Override
     @Transactional
-    public DocumentDTO updateDocument(Long documentId, UpdateDocumentDTO documentDTO) throws NotFoundException {
-        return null;
+    public DocumentDTO updateDocument(Long documentId, UpdateDocumentDTO documentDTO) throws NotFoundException, AlreadyExistException {
+        Document document = this.documentRepository.findById(documentId)
+                .orElseThrow(() -> new NotFoundException("Document not found"));
+
+        if (Boolean.TRUE.equals(this.documentRepository.existsByTitle(documentDTO.getTitle()))) {
+            throw new AlreadyExistException("Document already exists");
+        }
+        document.setTitle(documentDTO.getTitle());
+        document.setBody(documentDTO.getBody());
+
+        return this.documentRepository.save(document).toDTO();
     }
 
     @Override

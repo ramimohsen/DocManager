@@ -53,7 +53,7 @@ public interface IDocument {
      * @return the updated document
      * @throws NotFoundException if the document does not exist
      */
-    DocumentDTO updateDocument(Long documentId, UpdateDocumentDTO documentDTO) throws NotFoundException;
+    DocumentDTO updateDocument(Long documentId, UpdateDocumentDTO documentDTO) throws NotFoundException, AlreadyExistException;
 
     /**
      * Get all documents

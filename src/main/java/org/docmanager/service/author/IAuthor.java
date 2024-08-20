@@ -44,7 +44,7 @@ public interface IAuthor {
      * @return the updated author
      * @throws NotFoundException if the author does not exist
      */
-    AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException;
+    AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException, AlreadyExistException;
 
 
     /**

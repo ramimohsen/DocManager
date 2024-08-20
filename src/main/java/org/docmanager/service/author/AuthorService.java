@@ -53,8 +53,20 @@ public class AuthorService implements IAuthor {
 
     @Override
     @Transactional
-    public AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException {
-        return null;
+    public AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException, AlreadyExistException {
+
+        Author author = this.authorRepository.findById(authorId)
+                .orElseThrow(() -> new NotFoundException(String.format("Author with Id %s not found", authorId)));
+
+        if (Boolean.TRUE.equals(this.authorRepository.existsByEmail(authorDTO.getEmail()))) {
+            throw new AlreadyExistException(String.format("Author with email %s already exists", authorDTO.getEmail()));
+        }
+
+        author.setFirstName(authorDTO.getFirstName());
+        author.setLastName(authorDTO.getLastName());
+        author.setEmail(authorDTO.getEmail());
+
+        return this.authorRepository.save(author).toDTO();
     }
 
     @Override

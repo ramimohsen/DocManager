@@ -50,7 +50,7 @@ public class AuthorController {
     @Operation(summary = "Update author")
     @PutMapping("/{authorId}")
     @PreAuthorize("hasRole('ADMIN')")
-    public AuthorDTO updateAuthor(@PathVariable("authorId") Long authorId, @RequestBody UpdateAuthorDTO updateAuthorDTO) throws NotFoundException {
+    public AuthorDTO updateAuthor(@PathVariable("authorId") Long authorId, @RequestBody UpdateAuthorDTO updateAuthorDTO) throws NotFoundException, AlreadyExistException {
         return this.authorService.updateAuthor(authorId, updateAuthorDTO);
     }
 
