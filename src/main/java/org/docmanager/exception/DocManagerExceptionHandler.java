@@ -11,6 +11,7 @@ import org.docmanager.exception.response.ViolationErrors;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -31,6 +32,12 @@ public class DocManagerExceptionHandler {
 
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> notFoundExceptionHandling(NotFoundException exception, WebRequest request) {
+        return new ResponseEntity<>(new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
+                request.getDescription(false), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<Object> userNameNotFoundExceptionHandling(UsernameNotFoundException exception, WebRequest request) {
         return new ResponseEntity<>(new ErrorDetails(LocalDateTime.now(), exception.getMessage(),
                 request.getDescription(false), HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
     }

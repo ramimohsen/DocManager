@@ -60,7 +60,6 @@ public class Document {
                 .authors(authors.stream()
                         .map(Author::toDTO)
                         .collect(Collectors.toSet()))
-                .references(references.stream().map(Document::toDTO).collect(Collectors.toSet()))
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .build();

@@ -5,6 +5,8 @@ import org.docmanager.dto.authors.CreateAuthorDTO;
 import org.docmanager.dto.authors.UpdateAuthorDTO;
 import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IAuthor {
 
@@ -37,10 +39,19 @@ public interface IAuthor {
     /**
      * Update author
      *
-     * @param authorId the author id
+     * @param authorId  the author id
      * @param authorDTO the author to update
      * @return the updated author
      * @throws NotFoundException if the author does not exist
      */
     AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException;
+
+
+    /**
+     * Get all authors
+     *
+     * @param pageable the pagination information
+     * @return the list of authors
+     */
+    Page<AuthorDTO> getAllAuthors(Pageable pageable);
 }

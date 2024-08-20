@@ -5,6 +5,8 @@ import org.docmanager.dto.document.DocumentDTO;
 import org.docmanager.dto.document.UpdateDocumentDTO;
 import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface IDocument {
 
@@ -15,7 +17,7 @@ public interface IDocument {
      * @return the created document
      * @throws AlreadyExistException if the document already exists
      */
-    DocumentDTO createDocument(CreateDocumentDTO documentDTO) throws AlreadyExistException;
+    DocumentDTO createDocument(CreateDocumentDTO documentDTO) throws AlreadyExistException, NotFoundException;
 
     /**
      * Get a document by its id
@@ -53,4 +55,11 @@ public interface IDocument {
      */
     DocumentDTO updateDocument(Long documentId, UpdateDocumentDTO documentDTO) throws NotFoundException;
 
+    /**
+     * Get all documents
+     *
+     * @param pageable the pagination information
+     * @return the documents
+     */
+    Page<DocumentDTO> getAllDocuments(Pageable pageable);
 }

@@ -11,7 +11,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @Data
@@ -47,9 +46,7 @@ public class Author {
                 .id(id)
                 .firstName(firstName)
                 .lastName(lastName)
-                .documents(documents.stream()
-                        .map(Document::toDTO)
-                        .collect(Collectors.toSet()))
+                .email(email)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
                 .build();

@@ -8,8 +8,11 @@ import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.model.Author;
 import org.docmanager.repository.AuthorRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 @RequiredArgsConstructor
@@ -52,5 +55,10 @@ public class AuthorService implements IAuthor {
     @Transactional
     public AuthorDTO updateAuthor(Long authorId, UpdateAuthorDTO authorDTO) throws NotFoundException {
         return null;
+    }
+
+    @Override
+    public Page<AuthorDTO> getAllAuthors(Pageable pageable) {
+        return this.authorRepository.findAll(pageable).map(Author::toDTO);
     }
 }

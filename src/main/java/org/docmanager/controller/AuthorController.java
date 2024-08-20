@@ -9,9 +9,12 @@ import org.docmanager.dto.authors.UpdateAuthorDTO;
 import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.service.author.AuthorService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -49,6 +52,13 @@ public class AuthorController {
     @PreAuthorize("hasRole('ADMIN')")
     public AuthorDTO updateAuthor(@PathVariable("authorId") Long authorId, @RequestBody UpdateAuthorDTO updateAuthorDTO) throws NotFoundException {
         return this.authorService.updateAuthor(authorId, updateAuthorDTO);
+    }
+
+    @Operation(summary = "Get all authors")
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+    public Page<AuthorDTO> getAllAuthors(Pageable pageable) {
+        return this.authorService.getAllAuthors(pageable);
     }
 
 }

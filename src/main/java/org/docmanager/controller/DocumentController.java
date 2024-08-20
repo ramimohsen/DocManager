@@ -10,6 +10,8 @@ import org.docmanager.dto.document.UpdateDocumentDTO;
 import org.docmanager.exception.custom.AlreadyExistException;
 import org.docmanager.exception.custom.NotFoundException;
 import org.docmanager.service.document.DocumentService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -55,9 +57,15 @@ public class DocumentController {
     @Operation(summary = "Create document")
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public DocumentDTO createDocument(@RequestBody CreateDocumentDTO documentDTO) throws AlreadyExistException {
+    public DocumentDTO createDocument(@RequestBody CreateDocumentDTO documentDTO) throws AlreadyExistException, NotFoundException {
         return this.documentService.createDocument(documentDTO);
     }
 
+    @Operation(summary = "Get all documents")
+    @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN','CUSTOMER')")
+    public Page<DocumentDTO> getAllDocuments(Pageable pageable) {
+        return this.documentService.getAllDocuments(pageable);
+    }
 
 }
